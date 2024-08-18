@@ -91,7 +91,7 @@ end_group(){
 }
 
 start_group "GitHub API login"
-gh auth login --hostname ${GH_HOST}
+gh auth login --hostname ${GH_HOST} --with-token < <(echo ${GH_TOKEN})
 end_group
 
 start_group "Download code coverage results from current run"
