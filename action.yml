@@ -79,6 +79,7 @@ runs:
       id: coverage
       run: $GITHUB_ACTION_PATH/scripts/github-action.sh "${{ github.repository }}" "${{ github.event.pull_request.number }}" "${{ github.run_id }}"
       env:
+        GH_DEBUG: api
         GH_HOST: ${{ github.server_url }}
         GH_REPO: ${{ github.repository }}
         GH_TOKEN: ${{ github.token }}
