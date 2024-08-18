@@ -74,6 +74,7 @@ if [[ -z ${GITHUB_OUTPUT+x} ]]; then
     exit 1
 fi
 
+export GH_ENTERPRISE_TOKEN=${GITHUB_TOKEN} # GitHub Enterprise compatibility
 export GH_REPO="$GITHUB_REPOSITORY"
 
 start_group(){
