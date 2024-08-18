@@ -74,7 +74,10 @@ if [[ -z ${GITHUB_OUTPUT+x} ]]; then
     exit 1
 fi
 
-export GH_ENTERPRISE_TOKEN=${GITHUB_TOKEN} # GitHub Enterprise compatibility
+# GitHub Enterprise compatibility
+export GH_ENTERPRISE_TOKEN=${GITHUB_TOKEN}
+export GH_HOST=$(echo "${GH_HOST}" | sed -e 's/[^/]*\/\/\([^@]*@\)\?\([^:/]*\).*/\2/')
+
 export GH_REPO="$GITHUB_REPOSITORY"
 
 start_group(){
