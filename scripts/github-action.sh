@@ -75,7 +75,6 @@ if [[ -z ${GITHUB_OUTPUT+x} ]]; then
 fi
 
 # GitHub Enterprise compatibility
-export GH_ENTERPRISE_TOKEN=${GH_TOKEN}
 export GH_HOST=$(echo "${GH_HOST}" | sed -e 's/[^/]*\/\/\([^@]*@\)\?\([^:/]*\).*/\2/')
 
 export GH_REPO="$GITHUB_REPOSITORY"
@@ -91,7 +90,9 @@ end_group(){
 }
 
 start_group "GitHub API login"
-gh auth login --hostname ${GH_HOST} --with-token < <(echo ${GH_TOKEN})
+if [ "${GH_HOST}" != "github.com" ]; then
+  gh auth login --hostname ${GH_HOST} --with-token < <(echo ${GH_TOKEN})
+fi
 end_group
 
 start_group "Download code coverage results from current run"
