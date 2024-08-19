@@ -92,6 +92,7 @@ end_group(){
 start_group "GitHub API login"
 if [ "${GH_HOST}" != "github.com" ]; then
   gh auth login --hostname ${GH_HOST} --with-token < <(echo ${GH_TOKEN})
+  gh auth status --hostname ${GH_HOST}
 fi
 end_group
 
