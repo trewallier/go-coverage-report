@@ -94,7 +94,7 @@ if [ "${GH_HOST}" != "github.com" ]; then
   gh auth login --hostname ${GH_HOST} --with-token < <(echo ${GH_TOKEN})
   gh auth status --hostname ${GH_HOST}
   gh version
-  gh run list "$GITHUB_RUN_ID" --repo "${GH_HOST}/${GH_REPO}"
+  gh run list --repo "${GH_HOST}/${GH_REPO}"
 fi
 end_group
 
