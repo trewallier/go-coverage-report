@@ -93,11 +93,13 @@ start_group "GitHub API login"
 if [ "${GH_HOST}" != "github.com" ]; then
   gh auth login --hostname ${GH_HOST} --with-token < <(echo ${GH_TOKEN})
   gh auth status --hostname ${GH_HOST}
+  gh version
+  gh run list "$GITHUB_RUN_ID" --repo "${GH_HOST}/${GH_REPO}"
 fi
 end_group
 
 start_group "Download code coverage results from current run"
-gh run download "$GITHUB_RUN_ID" --repo "${GH_HOST}/${GH_REPO}" --name="$COVERAGE_ARTIFACT_NAME" --dir="/tmp/gh-run-download-$GITHUB_RUN_ID"
+GH_DEBUG=api gh run download "$GITHUB_RUN_ID" --repo "${GH_HOST}/${GH_REPO}" --name="$COVERAGE_ARTIFACT_NAME" --dir="/tmp/gh-run-download-$GITHUB_RUN_ID"
 mv "/tmp/gh-run-download-$GITHUB_RUN_ID/$COVERAGE_FILE_NAME" $NEW_COVERAGE_PATH
 rm -r "/tmp/gh-run-download-$GITHUB_RUN_ID"
 end_group
