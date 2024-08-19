@@ -95,6 +95,11 @@ if [ "${GH_HOST}" != "github.com" ]; then
   gh auth status --hostname ${GH_HOST}
   gh version
   gh run list --repo "${GH_HOST}/${GH_REPO}"
+  curl -L \
+    -H "Accept: application/vnd.github+json" \
+    -H "Authorization: Bearer ${GH_TOKEN}" \
+    -H "X-GitHub-Api-Version: 2022-11-28" \
+    "https://${GH_HOST}/api/v3/repos/${GH_REPO}/actions/runs/${GITHUB_RUN_ID}/artifacts"
 fi
 end_group
 
